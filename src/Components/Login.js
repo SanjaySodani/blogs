@@ -1,20 +1,28 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import './custom.css';
 
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState("password");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.pathname || '/';
 
   const handleSubmit = () => {
-    axios.post('http://localhost:5000/api/login', { username, password }).then((res) => {
-      localStorage.setItem('blogKey', res.data.token);
-      navigate('/', {replace: true});
-    }).catch((error)=>{
-      window.alert("Invalid username/password");
-    })
+    axios.post('http://localhost:5000/api/login',
+      {
+        username, password
+      }).then((res) => {
+        const data = res.data;
+        localStorage.setItem('blogKey', data.token);
+        navigate(from, { replace: true })
+      }).catch((error) => {
+        window.alert("Invalid username/password");
+      });
   }
 
   const handleTogglePassword = () => {
@@ -30,7 +38,7 @@ function Login() {
 
   return (
     <div className='container'>
-      <div className='row row-cols-1 justify-content-center vh-100'>
+      <div className='row row-cols-1 row-cols-lg-2 justify-content-center vh-100'>
         <div className='col my-auto'>
           <h2 className='mb-5 text-center'>Blogs</h2>
           <div className='form-group mx-sm-5 mx-3'>
