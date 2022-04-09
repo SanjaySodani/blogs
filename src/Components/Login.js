@@ -19,7 +19,7 @@ function Login() {
       }).then((res) => {
         const data = res.data;
         localStorage.setItem('blogKey', data.token);
-        navigate(from, { replace: true })
+        navigate(from, { replace: true });
       }).catch((error) => {
         window.alert("Invalid username/password");
       });
@@ -40,7 +40,7 @@ function Login() {
     <div className='container'>
       <div className='row row-cols-1 row-cols-lg-2 justify-content-center vh-100'>
         <div className='col my-auto'>
-          <h2 className='mb-5 text-center'>Blogs</h2>
+          <h1 className='font-weight-bolder mb-5 text-center'>Blogs</h1>
           <div className='form-group mx-sm-5 mx-3'>
             <h3 className='text-monospace mb-4'>Please login</h3>
             <div className='input-group my-2'>

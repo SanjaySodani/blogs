@@ -16,7 +16,7 @@ function RequireAuth() {
       }).then((res) => {
         setAuth(true);
       }).catch((err) => {
-        navigate('/login', { state: location });
+        navigate('/login', { state: location, replace: true });
       });
     } else {
       navigate('/login', { state: location });

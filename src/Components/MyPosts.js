@@ -5,15 +5,17 @@ import Navigation from './Navigation';
 
 function Posts() {
   const [posts, setPosts] = useState([]);
+  const [name, setName] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/all-posts', {
+    axios.get('http://localhost:5000/api/my-posts', {
       headers: { authorization: 'Bearer ' + localStorage.getItem('blogKey') }
     }).then((res) => {
-      const data = res.data.data;
-      setPosts(data);
+      const data = res.data;
+      setPosts(data.data);
+      setName(data.name);
     }).catch((err) => {
       navigate('/login', { state: location });
     });
@@ -23,7 +25,7 @@ function Posts() {
     <>
       <Navigation />
       <div className="container my-5">
-        <h2 className='font-weight-bolder my-3'>All posts</h2>
+        <h2 className='font-weight-bolder my-3'>{name}'s posts</h2>
         <div className="row row-cols-1 justify-content-center">
           {posts.length !== 0 ? posts.map((item) => {
             return (
