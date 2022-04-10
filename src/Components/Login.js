@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './custom.css';
@@ -12,8 +12,20 @@ function Login() {
   const navigate = useNavigate();
   const from = location.state?.pathname || '/';
 
+  useEffect(() => {
+    const user = localStorage.getItem('blogKey');
+
+    if (user) {
+      axios.get('https://blog-site-s.herokuapp.com/api/authenticated', {
+        headers: { authorization: 'Bearer ' + localStorage.getItem('blogKey') }
+      }).then((res) => {
+        navigate('/');
+      });
+    }
+  }, []);
+
   const handleSubmit = () => {
-    axios.post('http://localhost:5000/api/login',
+    axios.post('https://blog-site-s.herokuapp.com/api/login',
       {
         username, password
       }).then((res) => {

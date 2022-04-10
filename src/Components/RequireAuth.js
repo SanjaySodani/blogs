@@ -11,7 +11,7 @@ function RequireAuth() {
     const user = localStorage.getItem('blogKey');
 
     if (user) {
-      axios.get('http://localhost:5000/api/authenticated', {
+      axios.get('https://blog-site-s.herokuapp.com/api/authenticated', {
         headers: { authorization: 'Bearer ' + localStorage.getItem('blogKey') }
       }).then((res) => {
         setAuth(true);
@@ -19,7 +19,7 @@ function RequireAuth() {
         navigate('/login', { state: location, replace: true });
       });
     } else {
-      navigate('/login', { state: location });
+      navigate('/login', { state: location, replace: true });
     }
 
     return function cleanup () {

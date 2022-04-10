@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import './custom.css';
 
-function Navigation() {
+function Navigation(props) {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <Link className="navbar-brand font-weight-bolder" to='/'>Blog Site</Link>
@@ -10,17 +11,16 @@ function Navigation() {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+          <li className={props.active === 'posts' ? 'nav-item active' : 'nav-item'}>
             <Link className='nav-link' to='/posts'>All Posts</Link>
           </li>
-          <li className="nav-item">
+          <li className={props.active === 'myposts' ? 'nav-item active' : 'nav-item'}>
             <Link className='nav-link' to='/my-posts'>My Posts</Link>
           </li>
         </ul>
-      </div>
-
-      <div>
-        <Link className='text-danger' to='/logout'>Logout</Link>
+        <div>
+          <Link className='text-danger btn btn-logout' to='/logout'>Logout</Link>
+        </div>
       </div>
     </nav>
   )

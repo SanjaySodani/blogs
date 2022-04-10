@@ -6,6 +6,7 @@ import MyPosts from './Components/MyPosts';
 import Logout from './Components/Logout';
 import RequireAuth from './Components/RequireAuth';
 import React, { useState } from 'react';
+import CreatePost from './Components/CreatePost';
 export const AuthContext = React.createContext();
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/posts' element={<Posts />} />
             <Route exact path='/my-posts' element={<MyPosts /> } />
+            <Route exact path='/create-post' element={<CreatePost /> } />
           </Route>
         </Routes>
       </AuthContext.Provider>
